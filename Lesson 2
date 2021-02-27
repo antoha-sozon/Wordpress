@@ -4,8 +4,9 @@ ACF Documentation: https://www.advancedcustomfields.com/resources/
 * ACF Options Page: https://www.advancedcustomfields.com/resources/options-page/
 * ACF Options Text: https://www.advancedcustomfields.com/resources/text/
 
-Function start optimization:
+Code for new template: <?php /* Template Name: Example Template */ ?>
 
+Function start optimization:
 /* Disable checking updates for plugins  */
 function disable_check_pugin_update( $value ) {
   	if( isset( $value->response['acfPro/acf.php'] ) ) {        
