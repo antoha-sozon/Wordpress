@@ -4,3 +4,12 @@ ACF Documentation: https://www.advancedcustomfields.com/resources/
 
 
 Code for new template: <?php /* Template Name: Example Template */ ?>
+
+/* Disable checking updates for plugins  */
+function disable_check_pugin_update( $value ) {
+  	if( isset( $value->response['acfPro/acf.php'] ) ) {        
+		unset( $value->response['acfPro/acf.php'] );
+    }
+    return $value;
+ }
+add_filter( 'site_transient_update_plugins', 'disable_check_pugin_update' );
