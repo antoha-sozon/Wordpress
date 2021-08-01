@@ -13,3 +13,68 @@ function disable_check_pugin_update( $value ) {
     return $value;
  }
 add_filter( 'site_transient_update_plugins', 'disable_check_pugin_update' );
+
+
+/*Register CUSTOM post type*/
+add_action('init', 'custom_register');
+function custom_register() {
+    $labels = array(
+        'name' => 'CUSTOMS',
+        'singular_name' => 'CUSTOM',
+        'add_new' => 'Add New',
+        'add_new_item' => 'Add New CUSTOM',
+        'edit_item' => 'Edit CUSTOM',
+        'new_item' => 'New CUSTOM',
+        'view_item' => 'View CUSTOM',
+        'search_items' => 'Search CUSTOMS',
+        'not_found' =>  'Nothing found',
+        'not_found_in_trash' => 'Nothing found in Trash',
+        'parent_item_colon' => ''
+    );
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'query_var' => true,
+        'has_archive' => true,
+        'rewrite' => array( 'slug' => false, 'with_front' => true ),
+        'capability_type' => 'post',
+        'menu_position' => 6,
+        'menu_icon' => 'dashicons-groups',
+        'supports' => array('title', 'excerpt', 'editor','thumbnail')
+    );
+    register_post_type( 'custom' , $args );
+}
+
+/*Register CUSTOM categories*/
+add_action('init', 'custom_categories_register');
+function custom_categories_register() {
+    $labels = array(
+        'name'                          => 'CUSTOM Categories',
+        'singular_name'                 => 'CUSTOM Category',
+        'search_items'                  => 'Search CUSTOM Categories',
+        'popular_items'                 => 'Popular CUSTOM Categories',
+        'all_items'                     => 'All CUSTOM Categories',
+        'parent_item'                   => 'Parent CUSTOM Category',
+        'edit_item'                     => 'Edit CUSTOM Category',
+        'update_item'                   => 'Update CUSTOM Category',
+        'add_new_item'                  => 'Add New CUSTOM Category',
+        'new_item_name'                 => 'New CUSTOM Category',
+        'separate_items_with_commas'    => 'Separate CUSTOM categories with commas',
+        'add_or_remove_items'           => 'Add or remove CUSTOM categories',
+        'choose_from_most_used'         => 'Choose from most used CUSTOM categories'
+    );
+    $args = array(
+        'label'                         => 'CUSTOM Categories',
+        'labels'                        => $labels,
+        'public'                        => true,
+        'hierarchical'                  => true,
+        'show_ui'                       => true,
+        'show_in_nav_menus'             => true,
+        'args'                          => array( 'orderby' => 'term_order' ),
+        'rewrite'                       => array( 'slug' => false, 'with_front' => true ),
+        'query_var'                     => true
+    );
+    register_taxonomy( 'custom_categories', 'custom', $args );
+}
